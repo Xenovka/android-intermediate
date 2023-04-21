@@ -2,9 +2,11 @@ package com.dicoding.storyapp.customview
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
@@ -24,6 +26,14 @@ class PasswordForm: AppCompatEditText {
         init()
     }
 
+    override fun setError(error: CharSequence?) {
+        super.setError(error)
+    }
+
+    override fun setError(error: CharSequence?, icon: Drawable?) {
+        super.setError(error, icon)
+    }
+
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         hint = "Password"
@@ -31,6 +41,8 @@ class PasswordForm: AppCompatEditText {
     }
 
     private fun init() {
+        val iType = inputType.toString()
+        Log.d("InputType", "Input Type: $iType")
         addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -38,8 +50,8 @@ class PasswordForm: AppCompatEditText {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if(s.length < 8) {
+                    error = context.getString(R.string.password_warning)
                     background = ContextCompat.getDrawable(context, R.drawable.edit_text_border_warning)
-                    Toast.makeText(context, "password must be contain 8 characters or more", Toast.LENGTH_SHORT).show()
                 } else {
                     background = ContextCompat.getDrawable(context, R.drawable.edit_text_border)
                 }

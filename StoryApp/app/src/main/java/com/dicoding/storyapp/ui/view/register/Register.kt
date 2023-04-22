@@ -1,4 +1,4 @@
-package com.dicoding.storyapp.view.register
+package com.dicoding.storyapp.ui.view.register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

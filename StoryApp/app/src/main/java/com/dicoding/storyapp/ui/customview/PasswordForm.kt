@@ -1,4 +1,4 @@
-package com.dicoding.storyapp.customview
+package com.dicoding.storyapp.ui.customview
 
 import android.content.Context
 import android.graphics.Canvas
@@ -46,12 +46,11 @@ class PasswordForm: AppCompatEditText {
         val inputHint = hint.toString()
 
         addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 val input = s.toString()
+
                 if(inputHint == emailHint) {
                     when {
                         input.isEmpty() -> error = context.getString(R.string.empty_email)
@@ -65,9 +64,7 @@ class PasswordForm: AppCompatEditText {
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {
-
-            }
+            override fun afterTextChanged(s: Editable?) {}
         })
     }
 }

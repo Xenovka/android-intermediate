@@ -16,12 +16,11 @@
         android:textStyle="bold"
         android:layout_marginBottom="10dp" />
 
-    <EditText
+    <com.dicoding.storyapp.customview.PasswordForm
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:padding="16dp"
-        android:background="@drawable/edit_text_border"
         android:hint="@string/email_address"
         android:layout_marginBottom="20dp" />
 
@@ -39,7 +38,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:padding="16dp"
-        android:inputType="textPassword"
-        android:background="@drawable/edit_text_border"/>
+        android:hint="@string/password"
+        android:inputType="textPassword"/>
 
 </LinearLayout>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.view.main.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -16,7 +16,7 @@
         android:textStyle="bold"
         android:layout_marginBottom="10dp" />
 
-    <com.dicoding.storyapp.customview.PasswordForm
+    <com.dicoding.storyapp.ui.customview.PasswordForm
         android:id="@+id/ed_register_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         android:textStyle="bold"
         android:layout_marginBottom="10dp" />
 
-    <com.dicoding.storyapp.customview.PasswordForm
+    <com.dicoding.storyapp.ui.customview.PasswordForm
         android:id="@+id/ed_register_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
         android:textStyle="bold"
         android:layout_marginBottom="10dp" />
 
-    <com.dicoding.storyapp.customview.PasswordForm
+    <com.dicoding.storyapp.ui.customview.PasswordForm
         android:id="@+id/ed_register_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

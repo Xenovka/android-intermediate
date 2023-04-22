@@ -3,8 +3,10 @@ package com.dicoding.storyapp.ui.view.login
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.ViewModelFactoryDsl
 import com.dicoding.storyapp.R
 import com.dicoding.storyapp.databinding.ActivityLoginBinding
+import com.dicoding.storyapp.ui.view.ViewModelFactory
 
 class Login : AppCompatActivity() {
 
@@ -18,10 +20,18 @@ class Login : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        viewModel =
-    }
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory()
+        )[LoginViewModel::class.java]
 
-    private fun obtainViewModel(activity: AppCompatActivity): LoginViewModel {
-        val factory = ViewModelFactory
+        binding.apply {
+            btnLogin.setOnClickListener {
+                val email = edLoginEmail.text.toString()
+                val password = edLoginPassword.text.toString()
+
+                viewModel.login(email, password)
+            }
+        }
     }
 }

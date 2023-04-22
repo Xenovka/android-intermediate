@@ -1,8 +1,9 @@
-package com.dicoding.storyapp
+package com.dicoding.storyapp.view.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.dicoding.storyapp.R
 import com.dicoding.storyapp.view.login.Login
 
 class MainActivity : AppCompatActivity() {

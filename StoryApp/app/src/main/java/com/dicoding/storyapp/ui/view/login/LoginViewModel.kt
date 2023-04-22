@@ -1,5 +1,6 @@
 package com.dicoding.storyapp.ui.view.login
 
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.dicoding.storyapp.api.ApiConfig
@@ -19,7 +20,6 @@ class LoginViewModel: ViewModel() {
                 ) {
                     if(response.isSuccessful) {
                         val responseBody = response.body()
-                        Log.d("LoginToken", "Token: ${responseBody?.loginResult?.token}")
                     }
                 }
 

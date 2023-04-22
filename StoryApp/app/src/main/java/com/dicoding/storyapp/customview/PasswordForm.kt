@@ -6,9 +6,7 @@ import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.dicoding.storyapp.R

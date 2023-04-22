@@ -41,8 +41,6 @@ class PasswordForm: AppCompatEditText {
     }
 
     private fun init() {
-        val iType = inputType.toString()
-        Log.d("InputType", "Input Type: $iType")
         addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 

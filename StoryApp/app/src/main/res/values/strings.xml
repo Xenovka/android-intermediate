@@ -12,4 +12,5 @@
     <string name="empty_email">email can not be empty!</string>
     <string name="empty_password">password can not be empty</string>
     <string name="button_login">LOGIN</string>
+    <string name="button_register">Register</string>
 </resources>

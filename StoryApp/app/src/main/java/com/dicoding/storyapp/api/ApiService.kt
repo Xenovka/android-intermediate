@@ -10,10 +10,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 
 private const val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLUFmMDNiWkloMi1sbW4ycW8iLCJpYXQiOjE2ODIxNzA5NTV9.0aMjCtcw6B7sNppymxhtxUE84YPuVQT3WPUohgd5ZTI"
 
@@ -26,12 +28,33 @@ interface ApiService {
         @Field("password") password: String
     ): Call<LoginResponse>
 
+    @Headers("Authorization: Bearer $token")
+    @FormUrlEncoded
+    @POST("v1/register")
+    fun register(
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Call<RegisterResponse>
+
+    @Headers("Authorization: Bearer $token")
     @Multipart
     @POST("v1/stories")
     fun uploadStory(
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody
     ): Call<StoryUploadResponse>
+
+    @Headers("Authorization: Bearer $token")
+    @GET("stories")
+    fun getAllStories(): Call<StoryResponse>
+
+    @Headers("Authorization: Bearer $token")
+    @GET("stories/{id}")
+    fun getStoryDetail(
+        @Path("id") id: String
+    ): Call<StoryDetailResponse>
+
 }
 
 class ApiConfig {

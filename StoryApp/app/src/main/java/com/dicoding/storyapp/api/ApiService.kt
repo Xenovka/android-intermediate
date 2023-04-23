@@ -20,7 +20,6 @@ import retrofit2.http.Path
 private const val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLUFmMDNiWkloMi1sbW4ycW8iLCJpYXQiOjE2ODIxNzA5NTV9.0aMjCtcw6B7sNppymxhtxUE84YPuVQT3WPUohgd5ZTI"
 
 interface ApiService {
-    @Headers("Authorization: Bearer $token")
     @FormUrlEncoded
     @POST("v1/login")
     fun login(
@@ -28,7 +27,6 @@ interface ApiService {
         @Field("password") password: String
     ): Call<LoginResponse>
 
-    @Headers("Authorization: Bearer $token")
     @FormUrlEncoded
     @POST("v1/register")
     fun register(

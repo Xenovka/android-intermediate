@@ -37,7 +37,6 @@ class PasswordForm: AppCompatEditText {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
-        background = ContextCompat.getDrawable(context, R.drawable.edit_text_border)
     }
 
     private fun init() {

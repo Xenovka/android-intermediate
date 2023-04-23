@@ -13,4 +13,6 @@
     <string name="empty_password">password can not be empty</string>
     <string name="button_login">LOGIN</string>
     <string name="button_register">Register</string>
+    <string name="already_registered">Have an account? Login here</string>
+    <string name="create_account">Doesn\'t have an account?</string>
 </resources>

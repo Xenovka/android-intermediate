@@ -9,6 +9,7 @@ import com.dicoding.storyapp.R
 import com.dicoding.storyapp.databinding.ActivityLoginBinding
 import com.dicoding.storyapp.ui.view.ViewModelFactory
 import com.dicoding.storyapp.ui.view.main.MainActivity
+import com.dicoding.storyapp.ui.view.register.Register
 
 class Login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -32,10 +33,23 @@ class Login : AppCompatActivity() {
                 val password = edLoginPassword.text.toString()
 
                 viewModel.login(email, password)
-                val intent = Intent(this@Login, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                switchActivity("main")
+            }
+
+            ctaToRegister.setOnClickListener {
+                switchActivity("register")
             }
         }
+    }
+
+    private fun switchActivity(dest: String) {
+        val intent: Intent = when (dest) {
+            "main" -> Intent(this@Login, MainActivity::class.java)
+            "register" -> Intent(this@Login, Register::class.java)
+            else -> throw IllegalArgumentException("Unknown activity: $dest")
+        }
+
+        startActivity(intent)
+        finish()
     }
 }

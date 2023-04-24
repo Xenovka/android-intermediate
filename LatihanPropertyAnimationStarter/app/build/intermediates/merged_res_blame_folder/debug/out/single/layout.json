@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "E:\\BANGKIT 2023\\Labs\\android-intermediate\\LatihanPropertyAnimationStarter\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_signup.xml",
+        "source": "E:\\BANGKIT 2023\\Labs\\android-intermediate\\LatihanPropertyAnimationStarter\\app\\src\\main\\res\\layout\\activity_signup.xml"
+    },
+    {
+        "merged": "E:\\BANGKIT 2023\\Labs\\android-intermediate\\LatihanPropertyAnimationStarter\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
+        "source": "E:\\BANGKIT 2023\\Labs\\android-intermediate\\LatihanPropertyAnimationStarter\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "E:\\BANGKIT 2023\\Labs\\android-intermediate\\LatihanPropertyAnimationStarter\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_welcome.xml",
+        "source": "E:\\BANGKIT 2023\\Labs\\android-intermediate\\LatihanPropertyAnimationStarter\\app\\src\\main\\res\\layout\\activity_welcome.xml"
+    },
+    {
+        "merged": "E:\\BANGKIT 2023\\Labs\\android-intermediate\\LatihanPropertyAnimationStarter\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_login.xml",
+        "source": "E:\\BANGKIT 2023\\Labs\\android-intermediate\\LatihanPropertyAnimationStarter\\app\\src\\main\\res\\layout\\activity_login.xml"
+    }
+]

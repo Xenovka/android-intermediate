@@ -98,4 +98,12 @@
 
     </RelativeLayout>
 
+    <ProgressBar
+        android:id="@+id/progress_register"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        style="Widget.MaterialComponents.CircularProgressIndicator"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+
 </LinearLayout>

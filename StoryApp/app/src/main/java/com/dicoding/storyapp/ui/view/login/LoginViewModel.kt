@@ -2,16 +2,17 @@ package com.dicoding.storyapp.ui.view.login
 
 import android.content.Intent
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.dicoding.storyapp.api.ApiConfig
 import com.dicoding.storyapp.api.LoginResponse
+import com.dicoding.storyapp.model.UserModel
+import com.dicoding.storyapp.model.UserPreference
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel: ViewModel() {
+class LoginViewModel(private val pref: UserPreference): ViewModel() {
     private val _isSuccessful = MutableLiveData<Boolean>()
     val isSuccessful: LiveData<Boolean> = _isSuccessful
 
@@ -23,6 +24,12 @@ class LoginViewModel: ViewModel() {
                     call: Call<LoginResponse>,
                     response: Response<LoginResponse>
                 ) {
+                    if(response.isSuccessful) {
+                        val result = response.body()?.loginResult
+                        viewModelScope.launch {
+                            saveUser(UserModel(result?.userId, result?.name, result?.token, true))
+                        }
+                    }
                     _isSuccessful.value = response.isSuccessful
                 }
 
@@ -30,5 +37,15 @@ class LoginViewModel: ViewModel() {
                     Log.e("ErrorLogin", "onFailure: ${t.message}")
                 }
             })
+    }
+
+    fun getUser(): LiveData<UserModel> {
+        return pref.getUser().asLiveData()
+    }
+
+    fun saveUser(user: UserModel) {
+        viewModelScope.launch {
+            pref.saveUser(user)
+        }
     }
 }

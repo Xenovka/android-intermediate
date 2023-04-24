@@ -1,16 +1,23 @@
 package com.dicoding.storyapp.ui.view.register
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.storyapp.databinding.ActivityRegisterBinding
+import com.dicoding.storyapp.model.UserPreference
 import com.dicoding.storyapp.ui.view.ViewModelFactory
-import com.dicoding.storyapp.ui.view.login.Login
+import com.dicoding.storyapp.ui.view.login.LoginActivity
 
-class Register : AppCompatActivity() {
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "data")
+
+class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var viewModel: RegisterViewModel
 
@@ -21,11 +28,11 @@ class Register : AppCompatActivity() {
 
         viewModel = ViewModelProvider(
             this,
-            ViewModelFactory()
+            ViewModelFactory(UserPreference.getInstance(dataStore))
         )[RegisterViewModel::class.java]
 
         binding.apply {
-            viewModel.isSuccessful.observe(this@Register) {
+            viewModel.isSuccessful.observe(this@RegisterActivity) {
                 showMessage(it)
             }
 
@@ -46,7 +53,7 @@ class Register : AppCompatActivity() {
     }
 
     private fun switchActivity() {
-        val intent = Intent(this@Register, Login::class.java)
+        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -54,10 +61,10 @@ class Register : AppCompatActivity() {
     private fun showMessage(state: Boolean) {
         if(state) {
             showLoading(false)
-            Toast.makeText(this@Register, "Register Successful", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@RegisterActivity, "Register Successful", Toast.LENGTH_SHORT).show()
             switchActivity()
         } else {
-            Toast.makeText(this@Register, "Invalid credentials! Please check again.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@RegisterActivity, "Invalid credentials! Please check again.", Toast.LENGTH_SHORT).show()
             showLoading(false)
         }
     }

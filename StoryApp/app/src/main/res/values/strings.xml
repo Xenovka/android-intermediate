@@ -15,6 +15,7 @@
     <string name="button_register">Register</string>
     <string name="already_registered">Have an account? Login here</string>
     <string name="create_account">Doesn\'t have an account?</string>
-    <string name="greeting">Welcome, %1$s</string>
     <string name="menu_logout">Logout</string>
+    <string name="story_thumbnail">Story Thumbnail</string>
+    <string name="default_author">Author Name</string>
 </resources>

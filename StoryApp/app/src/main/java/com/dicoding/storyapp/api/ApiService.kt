@@ -44,11 +44,11 @@ interface ApiService {
     ): Call<StoryUploadResponse>
 
     @Headers("Authorization: Bearer $token")
-    @GET("stories")
+    @GET("v1/stories")
     fun getAllStories(): Call<StoryResponse>
 
     @Headers("Authorization: Bearer $token")
-    @GET("stories/{id}")
+    @GET("v1/stories/{id}")
     fun getStoryDetail(
         @Path("id") id: String
     ): Call<StoryDetailResponse>

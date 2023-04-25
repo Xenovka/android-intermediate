@@ -6,11 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.storyapp.R
+import com.dicoding.storyapp.adapter.StoryListAdapter
 import com.dicoding.storyapp.databinding.ActivityMainBinding
 import com.dicoding.storyapp.model.UserPreference
 import com.dicoding.storyapp.ui.view.ViewModelFactory
@@ -21,13 +24,17 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var storyListAdapter: StoryListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        showLoading(true)
+
         setupViewModel()
+        setupRecyclerView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -52,12 +59,37 @@ class MainActivity : AppCompatActivity() {
         )[MainViewModel::class.java]
 
         viewModel.getUser().observe(this) {user ->
-            if(user.isLoggedIn) {
-                binding.tvHomeUsername.text = getString(R.string.greeting, user.name)
-            } else {
+            if(!user.isLoggedIn) {
                 startActivity(Intent(this@MainActivity, LoginActivity::class.java))
                 finish()
             }
+        }
+
+        viewModel.getAllStories().observe(this) {
+            if(it != null) {
+                storyListAdapter.setStories(it)
+                showLoading(false)
+            }
+        }
+    }
+
+    private fun setupRecyclerView() {
+        storyListAdapter = StoryListAdapter()
+
+        binding.apply {
+            rvStory.layoutManager = LinearLayoutManager(this@MainActivity)
+            rvStory.setHasFixedSize(true)
+            rvStory.adapter = storyListAdapter
+
+            viewModel.setAllStories()
+        }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if(state) {
+            binding.progressStory.visibility = View.VISIBLE
+        } else {
+            binding.progressStory.visibility = View.GONE
         }
     }
 }

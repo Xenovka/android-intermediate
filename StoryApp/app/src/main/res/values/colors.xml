@@ -10,4 +10,5 @@
     <color name="red">#F31919</color>
     <color name="gray">#9B9A9A</color>
     <color name="blue">#1A1ADC</color>
+    <color name="stroke_color">#B1B2B6</color>
 </resources>

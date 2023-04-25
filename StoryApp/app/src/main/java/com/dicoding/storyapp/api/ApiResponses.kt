@@ -46,7 +46,7 @@ data class RegisterResponse(
 data class StoryResponse(
 
     @field:SerializedName("listStory")
-    val listStory: List<StoryItem?>? = null,
+    val listStory: ArrayList<StoryItem>,
 
     @field:SerializedName("error")
     val error: Boolean? = null,

@@ -16,4 +16,5 @@
     <string name="already_registered">Have an account? Login here</string>
     <string name="create_account">Doesn\'t have an account?</string>
     <string name="greeting">Welcome, %1$s</string>
+    <string name="menu_logout">Logout</string>
 </resources>

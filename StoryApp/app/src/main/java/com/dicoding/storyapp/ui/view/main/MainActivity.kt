@@ -14,9 +14,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.storyapp.R
 import com.dicoding.storyapp.adapter.StoryListAdapter
+import com.dicoding.storyapp.api.StoryItem
 import com.dicoding.storyapp.databinding.ActivityMainBinding
 import com.dicoding.storyapp.model.UserPreference
 import com.dicoding.storyapp.ui.view.ViewModelFactory
+import com.dicoding.storyapp.ui.view.detail.DetailActivity
 import com.dicoding.storyapp.ui.view.login.LoginActivity
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "data")
@@ -83,6 +85,14 @@ class MainActivity : AppCompatActivity() {
 
             viewModel.setAllStories()
         }
+
+        storyListAdapter.setOnItemClickCallback(object: StoryListAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: StoryItem) {
+                val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_ID, data.id)
+                startActivity(intent)
+            }
+        })
     }
 
     private fun showLoading(state: Boolean) {

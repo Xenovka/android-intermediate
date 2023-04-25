@@ -23,8 +23,8 @@ class StoryListAdapter : RecyclerView.Adapter<StoryListAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvStoryAuthor: TextView = view.findViewById(R.id.tv_story_author)
-        val ivStoryItem: ImageView = view.findViewById(R.id.iv_story_item)
+        val tvItemName: TextView = view.findViewById(R.id.tv_item_name)
+        val ivItemPhoto: ImageView = view.findViewById(R.id.iv_item_photo)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.story_item, parent, false))
@@ -36,9 +36,9 @@ class StoryListAdapter : RecyclerView.Adapter<StoryListAdapter.ViewHolder>() {
             Glide.with(itemView)
                 .load(story.photoUrl)
                 .centerCrop()
-                .into(ivStoryItem)
+                .into(ivItemPhoto)
 
-            tvStoryAuthor.text = story.name
+            tvItemName.text = story.name
 
             itemView.setOnClickListener { onItemClickCallback.onItemClicked(stories[adapterPosition]) }
         }

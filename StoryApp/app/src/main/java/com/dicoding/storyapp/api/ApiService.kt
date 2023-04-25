@@ -50,7 +50,7 @@ interface ApiService {
     @Headers("Authorization: Bearer $token")
     @GET("v1/stories/{id}")
     fun getStoryDetail(
-        @Path("id") id: String
+        @Path("id") id: String?
     ): Call<StoryDetailResponse>
 
 }

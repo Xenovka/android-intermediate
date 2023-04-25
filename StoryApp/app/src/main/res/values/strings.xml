@@ -17,5 +17,8 @@
     <string name="create_account">Doesn\'t have an account?</string>
     <string name="menu_logout">Logout</string>
     <string name="story_thumbnail">Story Thumbnail</string>
-    <string name="default_author">Author Name</string>
+    <string name="item_name">Item Name</string>
+    <string name="detail_name">Detail Name</string>
+    <string name="detail_description">Detail Description</string>
+    <string name="detail_photo">Detail Photo</string>
 </resources>

@@ -23,16 +23,16 @@
             tools:ignore="UseCompoundDrawables">
 
             <TextView
-                android:id="@+id/tv_story_author"
+                android:id="@+id/tv_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/default_author"
+                android:text="@string/item_name"
                 android:textStyle="bold"
                 android:textSize="16sp"/>
 
             <ImageView
-                android:id="@+id/iv_story_item"
+                android:id="@+id/iv_item_photo"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:contentDescription="@string/story_thumbnail" />

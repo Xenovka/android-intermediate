@@ -1,11 +1,11 @@
 package com.dicoding.storyapp.ui.view.main
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
 
         setupViewModel()
         setupRecyclerView()
+
+        playAnimation()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -56,7 +58,6 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.menu_add_story -> {
                 startActivity(Intent(this@MainActivity, AddStoryActivity::class.java))
-                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -75,7 +76,6 @@ class MainActivity : AppCompatActivity() {
                 finish()
             } else {
                 token = user.token
-                Log.d("MainToken", token.toString())
                 viewModel.setAllStories(token)
             }
         }
@@ -104,6 +104,14 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         })
+    }
+
+    private fun playAnimation() {
+        val storyAnimation = ObjectAnimator.ofFloat(binding.rvStory, View.ALPHA, 1f).setDuration(1000)
+        AnimatorSet().apply {
+            play(storyAnimation)
+            start()
+        }
     }
 
     private fun showLoading(state: Boolean) {

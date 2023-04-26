@@ -1,6 +1,5 @@
 package com.dicoding.storyapp.ui.view.login
 
-import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.*
 import com.dicoding.storyapp.api.ApiConfig

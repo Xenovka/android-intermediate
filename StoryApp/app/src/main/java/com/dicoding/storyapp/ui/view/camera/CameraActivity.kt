@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import com.dicoding.storyapp.createFile
 import com.dicoding.storyapp.databinding.ActivityCameraBinding
 import com.dicoding.storyapp.ui.view.addStory.AddStoryActivity
-import com.dicoding.storyapp.ui.view.main.MainActivity
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding

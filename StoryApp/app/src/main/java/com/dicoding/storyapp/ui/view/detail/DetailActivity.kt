@@ -9,7 +9,6 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.dicoding.storyapp.R
 import com.dicoding.storyapp.databinding.ActivityDetailBinding
 import com.dicoding.storyapp.model.UserPreference
 import com.dicoding.storyapp.ui.view.ViewModelFactory

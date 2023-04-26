@@ -37,7 +37,6 @@ class MainViewModel(private val pref: UserPreference) : ViewModel() {
                     call: Call<StoryResponse>,
                     response: Response<StoryResponse>
                 ) {
-                    Log.d("AuthToken", "Bearer $token")
                     if(response.isSuccessful) {
                         stories.postValue(response.body()?.listStory)
                     }

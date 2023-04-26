@@ -13,6 +13,7 @@
         android:layout_height="0dp"
         android:overScrollMode="never"
         android:scrollbarSize="0dp"
+        android:alpha="0"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

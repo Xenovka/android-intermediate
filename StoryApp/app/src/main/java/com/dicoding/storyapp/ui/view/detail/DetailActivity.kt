@@ -19,6 +19,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var viewModel: DetailViewModel
+    private var token: String? = null
 
     companion object {
         const val EXTRA_ID = "extra_id"
@@ -42,7 +43,13 @@ class DetailActivity : AppCompatActivity() {
 
         val userId = intent.getStringExtra(EXTRA_ID)
 
-        viewModel.setStoryDetail(userId)
+        viewModel.getUser().observe(this) {
+            if(it.token?.isNotEmpty() == true) {
+                token = it.token
+                viewModel.setStoryDetail(userId, token)
+            }
+        }
+
         viewModel.getStoryDetail().observe(this) {
             if(it != null) {
                 binding.apply {

@@ -1,11 +1,11 @@
 package com.dicoding.storyapp.ui.view.addStory
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.dicoding.storyapp.api.ApiConfig
 import com.dicoding.storyapp.api.StoryUploadResponse
+import com.dicoding.storyapp.model.UserModel
+import com.dicoding.storyapp.model.UserPreference
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -14,12 +14,16 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class AddStoryViewModel: ViewModel() {
+class AddStoryViewModel(private val pref: UserPreference): ViewModel() {
     private val _isSuccessful = MutableLiveData<Boolean>()
     val isSuccessful: LiveData<Boolean> = _isSuccessful
 
-    fun uploadStory(file: File?, description: String) {
-        if(file != null) {
+    fun getUser(): LiveData<UserModel> {
+        return pref.getUser().asLiveData()
+    }
+
+    fun uploadStory(file: File?, description: String, token: String?) {
+        if(file != null && token != null) {
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
             val imageMultiPart: MultipartBody.Part = MultipartBody.Part.createFormData(
                 "photo",
@@ -28,7 +32,7 @@ class AddStoryViewModel: ViewModel() {
             )
 
             ApiConfig.getApiService()
-                .uploadStory(imageMultiPart, description)
+                .uploadStory(imageMultiPart, description, "Bearer $token")
                 .enqueue(object: Callback<StoryUploadResponse> {
                     override fun onResponse(
                         call: Call<StoryUploadResponse>,

@@ -34,6 +34,7 @@ class AddStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddStoryBinding
     private lateinit var viewModel: AddStoryViewModel
     private var getFile: File? = null
+    private var token: String? = null
 
     companion object {
         const val CAMERA_X_RESULT = 200
@@ -93,12 +94,12 @@ class AddStoryActivity : AppCompatActivity() {
             btnCamera.setOnClickListener { startCamera() }
             btnGallery.setOnClickListener { startGallery() }
             btnAdd.setOnClickListener {
-                val description = edAddDescription.text
+                val description = edAddDescription.text.toString()
                 if(getFile != null) {
                     Toast.makeText(this@AddStoryActivity, "Upload Successful", Toast.LENGTH_SHORT).show()
                     if(description.isNotEmpty()) {
                         showLoading(true)
-                        viewModel.uploadStory(getFile, edAddDescription.text.toString())
+                        viewModel.uploadStory(getFile, description, token)
                     } else {
                         edAddDescription.error = "Description can not be empty!"
                         showLoading(false)
@@ -120,6 +121,12 @@ class AddStoryActivity : AppCompatActivity() {
             if(it) {
                 showLoading(false)
                 switchActivity()
+            }
+        }
+
+        viewModel.getUser().observe(this) {
+            if(it.token?.isNotEmpty() == true) {
+                token = it.token
             }
         }
     }

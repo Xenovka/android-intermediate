@@ -29,14 +29,15 @@ class MainViewModel(private val pref: UserPreference) : ViewModel() {
         }
     }
 
-    fun setAllStories() {
+    fun setAllStories(token: String?) {
         ApiConfig.getApiService()
-            .getAllStories()
+            .getAllStories("Bearer $token")
             .enqueue(object: Callback<StoryResponse> {
                 override fun onResponse(
                     call: Call<StoryResponse>,
                     response: Response<StoryResponse>
                 ) {
+                    Log.d("AuthToken", "Bearer $token")
                     if(response.isSuccessful) {
                         stories.postValue(response.body()?.listStory)
                     }

@@ -30,4 +30,5 @@
     <string name="choose_image">Choose an Image</string>
     <string name="register_title">REGISTER</string>
     <string name="login_title">LOGIN</string>
+    <string name="change_language">Change Language</string>
 </resources>

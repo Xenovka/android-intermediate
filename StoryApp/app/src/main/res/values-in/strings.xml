@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="input_warning">Password harus lebih dari 8 karakter</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="email_address">Alamat Email</string>
+    <string name="name">Nama</string>
+    <string name="username">Username</string>
+    <string name="invalid_password">Password harus lebih dari 8 karakter</string>
+    <string name="invalid_email">Format alamat email salah!</string>
+    <string name="empty_email">Email tidak boleh kosong!</string>
+    <string name="empty_password">Password tidak boleh kosong!</string>
+    <string name="button_login">Masuk</string>
+    <string name="button_register">Daftar</string>
+    <string name="already_registered">Sudah memiliki akun? Masuk disini</string>
+    <string name="create_account">Tidak memiliki akun?</string>
+    <string name="menu_logout">Keluar</string>
+    <string name="story_thumbnail">Story Thumbnail</string>
+    <string name="item_name">Nama Item</string>
+    <string name="detail_name">Detail Item</string>
+    <string name="detail_description">Deskripsi Item</string>
+    <string name="detail_photo">Gambar Item</string>
+    <string name="add_story">Tambah Story</string>
+    <string name="camera">Kamera</string>
+    <string name="image_preview">Pratinjau Gambar</string>
+    <string name="gallery">Galeri</string>
+    <string name="add_description">Tambah Deskripsi</string>
+    <string name="upload_story">Unggah Story</string>
+    <string name="choose_image">Pilih gambar</string>
+    <string name="register_title">DAFTAR</string>
+    <string name="login_title">MASUK</string>
+    <string name="change_language">Ganti Bahasa</string>
+</resources>

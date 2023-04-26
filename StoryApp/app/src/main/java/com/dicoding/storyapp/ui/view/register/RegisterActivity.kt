@@ -1,5 +1,7 @@
 package com.dicoding.storyapp.ui.view.register
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +30,7 @@ class RegisterActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        playAnimation()
         setupViewModel()
 
         binding.apply {
@@ -43,6 +46,25 @@ class RegisterActivity : AppCompatActivity() {
 
             ctaToLogin.setOnClickListener {
                 switchActivity()
+            }
+        }
+    }
+
+    private fun playAnimation() {
+        binding.apply {
+            val name = ObjectAnimator.ofFloat(registerNameLayout, View.ALPHA, 1f).setDuration(500)
+            val email = ObjectAnimator.ofFloat(registerEmailLayout, View.ALPHA, 1f).setDuration(500)
+            val password = ObjectAnimator.ofFloat(registerPasswordLayout, View.ALPHA, 1f).setDuration(500)
+            val ctaLogin = ObjectAnimator.ofFloat(ctaToLogin, View.ALPHA, 1f).setDuration(500)
+            val btnRegister = ObjectAnimator.ofFloat(btnRegister, View.ALPHA, 1f).setDuration(500)
+
+            val together = AnimatorSet().apply {
+                playTogether(ctaLogin, btnRegister)
+            }
+
+            AnimatorSet().apply {
+                playSequentially(name, email, password, together)
+                start()
             }
         }
     }

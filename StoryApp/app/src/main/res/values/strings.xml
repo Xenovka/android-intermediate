@@ -28,4 +28,6 @@
     <string name="add_description">Add Description</string>
     <string name="upload_story">Upload Story</string>
     <string name="choose_image">Choose an Image</string>
+    <string name="register_title">REGISTER</string>
+    <string name="login_title">LOGIN</string>
 </resources>

@@ -8,11 +8,23 @@
     android:orientation="vertical"
     tools:context=".ui.view.main.MainActivity">
 
+    <TextView
+        android:id="@+id/tv_login_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_title"
+        android:textSize="46sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_email_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:alpha="0"
         app:startIconDrawable="@drawable/baseline_email_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -32,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:alpha="0"
         app:startIconDrawable="@drawable/baseline_lock_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -60,6 +73,7 @@
             android:textSize="12sp"
             android:textAllCaps="false"
             android:textColor="@color/blue"
+            android:alpha="0"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             style="@style/Widget.MaterialComponents.Button.TextButton"/>
@@ -73,6 +87,7 @@
             android:text="@string/button_login"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:alpha="0"
             android:layout_alignParentEnd="true"
             tools:ignore="RelativeOverlap" />
 

@@ -27,4 +27,5 @@
     <string name="gallery">Gallery</string>
     <string name="add_description">Add Description</string>
     <string name="upload_story">Upload Story</string>
+    <string name="choose_image">Choose an Image</string>
 </resources>

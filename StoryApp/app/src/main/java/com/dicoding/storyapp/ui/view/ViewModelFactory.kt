@@ -3,6 +3,7 @@ package com.dicoding.storyapp.ui.view
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.storyapp.model.UserPreference
+import com.dicoding.storyapp.ui.view.addStory.AddStoryViewModel
 import com.dicoding.storyapp.ui.view.detail.DetailViewModel
 import com.dicoding.storyapp.ui.view.login.LoginViewModel
 import com.dicoding.storyapp.ui.view.main.MainActivity
@@ -24,6 +25,9 @@ class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.New
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel() as T
+            }
+            modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
+                AddStoryViewModel() as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

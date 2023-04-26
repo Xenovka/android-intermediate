@@ -1,6 +1,7 @@
 package com.dicoding.storyapp.ui.view.addStory
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
@@ -8,17 +9,30 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
+import com.dicoding.storyapp.R
 import com.dicoding.storyapp.databinding.ActivityAddStoryBinding
+import com.dicoding.storyapp.model.UserPreference
 import com.dicoding.storyapp.rotateFile
+import com.dicoding.storyapp.ui.view.ViewModelFactory
 import com.dicoding.storyapp.ui.view.camera.CameraActivity
+import com.dicoding.storyapp.ui.view.main.MainActivity
 import com.dicoding.storyapp.uriToFile
 import java.io.File
 
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "data")
+
 class AddStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddStoryBinding
+    private lateinit var viewModel: AddStoryViewModel
     private var getFile: File? = null
 
     companion object {
@@ -71,10 +85,56 @@ class AddStoryActivity : AppCompatActivity() {
             )
         }
 
+        supportActionBar?.title = "New Story"
+
+        setupViewModel()
+
         binding.apply {
             btnCamera.setOnClickListener { startCamera() }
             btnGallery.setOnClickListener { startGallery() }
+            btnAdd.setOnClickListener {
+                val description = edAddDescription.text
+                if(getFile != null) {
+                    Toast.makeText(this@AddStoryActivity, "Upload Successful", Toast.LENGTH_SHORT).show()
+                    if(description.isNotEmpty()) {
+                        showLoading(true)
+                        viewModel.uploadStory(getFile, edAddDescription.text.toString())
+                    } else {
+                        edAddDescription.error = "Description can not be empty!"
+                        showLoading(false)
+                    }
+                } else {
+                    Toast.makeText(this@AddStoryActivity, "Please take a picture or choose from gallery!", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(UserPreference.getInstance(dataStore))
+        )[AddStoryViewModel::class.java]
+
+        viewModel.isSuccessful.observe(this) {
+            if(it) {
+                showLoading(false)
+                switchActivity()
+            }
+        }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if(state) {
+            binding.progressUpload.visibility = View.VISIBLE
+        } else {
+            binding.progressUpload.visibility = View.GONE
+        }
+    }
+
+    private fun switchActivity() {
+        startActivity(Intent(this@AddStoryActivity, MainActivity::class.java))
+        finish()
     }
 
     private fun startCamera() {
@@ -86,7 +146,7 @@ class AddStoryActivity : AppCompatActivity() {
         val intent = Intent()
         intent.action = ACTION_GET_CONTENT
         intent.type = "image/*"
-        val chooser = Intent.createChooser(intent, "Choose an Image")
+        val chooser = Intent.createChooser(intent, getString(R.string.choose_image))
         launcherIntentGallery.launch(chooser)
     }
 }

@@ -40,7 +40,7 @@ interface ApiService {
     @POST("v1/stories")
     fun uploadStory(
         @Part file: MultipartBody.Part,
-        @Part("description") description: RequestBody
+        @Part("description") description: String
     ): Call<StoryUploadResponse>
 
     @Headers("Authorization: Bearer $token")

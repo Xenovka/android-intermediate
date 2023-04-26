@@ -53,7 +53,7 @@
             android:id="@+id/ed_add_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/add_description"
+            android:hint="@string/add_description"
             android:textSize="14sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -66,5 +66,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_description"/>
+
+    <ProgressBar
+        android:id="@+id/progress_upload"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        style="Widget.MaterialComponents.CircularProgressIndicator"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

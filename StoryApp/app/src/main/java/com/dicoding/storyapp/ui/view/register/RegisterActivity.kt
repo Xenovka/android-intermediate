@@ -26,16 +26,11 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelFactory(UserPreference.getInstance(dataStore))
-        )[RegisterViewModel::class.java]
+        supportActionBar?.hide()
+
+        setupViewModel()
 
         binding.apply {
-            viewModel.isSuccessful.observe(this@RegisterActivity) {
-                showMessage(it)
-            }
-
             btnRegister.setOnClickListener {
                 showLoading(true)
 
@@ -56,6 +51,17 @@ class RegisterActivity : AppCompatActivity() {
         val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(UserPreference.getInstance(dataStore))
+        )[RegisterViewModel::class.java]
+
+        viewModel.isSuccessful.observe(this@RegisterActivity) {
+            showMessage(it)
+        }
     }
 
     private fun showMessage(state: Boolean) {

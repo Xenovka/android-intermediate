@@ -18,6 +18,7 @@ import com.dicoding.storyapp.api.StoryItem
 import com.dicoding.storyapp.databinding.ActivityMainBinding
 import com.dicoding.storyapp.model.UserPreference
 import com.dicoding.storyapp.ui.view.ViewModelFactory
+import com.dicoding.storyapp.ui.view.addStory.AddStoryActivity
 import com.dicoding.storyapp.ui.view.detail.DetailActivity
 import com.dicoding.storyapp.ui.view.login.LoginActivity
 
@@ -48,6 +49,11 @@ class MainActivity : AppCompatActivity() {
         return when(item.itemId) {
             R.id.menu_logout -> {
                 viewModel.logout()
+                true
+            }
+            R.id.menu_add_story -> {
+                startActivity(Intent(this@MainActivity, AddStoryActivity::class.java))
+                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)

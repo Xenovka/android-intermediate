@@ -35,10 +35,6 @@ class LoginActivity : AppCompatActivity() {
         setupViewModel()
 
         binding.apply {
-            viewModel.isSuccessful.observe(this@LoginActivity) {
-                setupAction(it)
-            }
-
             btnLogin.setOnClickListener {
                 showLoading(true)
                 val email = edLoginEmail.text.toString()
@@ -59,6 +55,10 @@ class LoginActivity : AppCompatActivity() {
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[LoginViewModel::class.java]
 
+        viewModel.isSuccessful.observe(this@LoginActivity) {
+            setupAction(it)
+        }
+
         viewModel.getUser().observe(this) { user ->
             this.user = user
         }
@@ -78,7 +78,6 @@ class LoginActivity : AppCompatActivity() {
     private fun setupAction(state: Boolean) {
         if(state) {
             showLoading(false)
-            Toast.makeText(this@LoginActivity, "Welcome", Toast.LENGTH_SHORT).show()
             switchActivity("main")
         } else {
             Toast.makeText(this@LoginActivity, "email or password is incorrect!", Toast.LENGTH_SHORT).show()

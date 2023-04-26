@@ -2,8 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/menu_add_story"
+        android:title="@string/add_story"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/menu_logout"
-        android:icon="@drawable/baseline_exit_to_app_24"
         android:title="@string/menu_logout"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 </menu>

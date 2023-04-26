@@ -21,4 +21,10 @@
     <string name="detail_name">Detail Name</string>
     <string name="detail_description">Detail Description</string>
     <string name="detail_photo">Detail Photo</string>
+    <string name="add_story">Add Story</string>
+    <string name="camera">Camera</string>
+    <string name="image_preview">Image Preview</string>
+    <string name="gallery">Gallery</string>
+    <string name="add_description">Add Description</string>
+    <string name="upload_story">Upload Story</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.dicoding.storyapp.ui.view.main
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

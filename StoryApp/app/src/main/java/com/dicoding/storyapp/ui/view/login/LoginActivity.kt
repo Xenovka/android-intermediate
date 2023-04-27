@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.datastore.core.DataStore
@@ -13,6 +15,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.storyapp.databinding.ActivityLoginBinding
+import com.dicoding.storyapp.isValidEmail
 import com.dicoding.storyapp.model.UserModel
 import com.dicoding.storyapp.model.UserPreference
 import com.dicoding.storyapp.ui.view.ViewModelFactory
@@ -37,11 +40,13 @@ class LoginActivity : AppCompatActivity() {
         setupViewModel()
 
         binding.apply {
+            setupValidateInput()
+
             btnLogin.setOnClickListener {
                 showLoading(true)
+
                 val email = edLoginEmail.text.toString()
                 val password = edLoginPassword.text.toString()
-
                 viewModel.login(email, password)
             }
 
@@ -49,6 +54,34 @@ class LoginActivity : AppCompatActivity() {
                 switchActivity("register")
             }
         }
+    }
+
+    private fun setupValidateInput() {
+        binding.edLoginEmail.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                setButtonEnabled()
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
+
+        binding.edLoginPassword.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                setButtonEnabled()
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
+    }
+
+    private fun setButtonEnabled() {
+        val email = binding.edLoginEmail.text
+        val password = binding.edLoginPassword.text
+        binding.btnLogin.isEnabled = email.isValidEmail() && password.toString().length >= 8
     }
 
     private fun playAnimation() {

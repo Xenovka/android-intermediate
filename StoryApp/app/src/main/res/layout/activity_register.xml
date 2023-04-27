@@ -99,7 +99,7 @@
             android:layout_centerVertical="true"
             style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
-        <Button
+        <com.dicoding.storyapp.ui.customview.MyButton
             android:id="@+id/btn_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,6 +109,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:alpha="0"
+            android:enabled="false"
             android:layout_alignParentEnd="true"
             tools:ignore="RelativeOverlap" />
 

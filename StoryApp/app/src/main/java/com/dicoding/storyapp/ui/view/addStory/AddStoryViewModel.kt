@@ -9,6 +9,7 @@ import com.dicoding.storyapp.model.UserPreference
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +25,7 @@ class AddStoryViewModel(private val pref: UserPreference): ViewModel() {
 
     fun uploadStory(file: File?, description: String, token: String?) {
         if(file != null && token != null) {
+            val imageDescription = description.toRequestBody("text/plain".toMediaType())
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
             val imageMultiPart: MultipartBody.Part = MultipartBody.Part.createFormData(
                 "photo",
@@ -32,7 +34,7 @@ class AddStoryViewModel(private val pref: UserPreference): ViewModel() {
             )
 
             ApiConfig.getApiService()
-                .uploadStory(imageMultiPart, description, "Bearer $token")
+                .uploadStory(imageMultiPart, imageDescription, "Bearer $token")
                 .enqueue(object: Callback<StoryUploadResponse> {
                     override fun onResponse(
                         call: Call<StoryUploadResponse>,

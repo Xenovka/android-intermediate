@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.storyapp.R
 import com.dicoding.storyapp.databinding.ActivityAddStoryBinding
 import com.dicoding.storyapp.model.UserPreference
+import com.dicoding.storyapp.reduceFileImage
 import com.dicoding.storyapp.rotateFile
 import com.dicoding.storyapp.ui.view.ViewModelFactory
 import com.dicoding.storyapp.ui.view.camera.CameraActivity
@@ -96,10 +97,11 @@ class AddStoryActivity : AppCompatActivity() {
             btnAdd.setOnClickListener {
                 val description = edAddDescription.text.toString()
                 if(getFile != null) {
+                    val file = reduceFileImage(getFile as File)
                     Toast.makeText(this@AddStoryActivity, "Upload Successful", Toast.LENGTH_SHORT).show()
                     if(description.isNotEmpty()) {
                         showLoading(true)
-                        viewModel.uploadStory(getFile, description, token)
+                        viewModel.uploadStory(file, description, token)
                     } else {
                         edAddDescription.error = "Description can not be empty!"
                         showLoading(false)

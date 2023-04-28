@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.storyapp.R
 import com.dicoding.storyapp.api.StoryItem
+import com.dicoding.storyapp.databinding.StoryItemBinding
 
 class StoryListAdapter : RecyclerView.Adapter<StoryListAdapter.ViewHolder>() {
     interface OnItemClickCallback {
@@ -22,12 +23,15 @@ class StoryListAdapter : RecyclerView.Adapter<StoryListAdapter.ViewHolder>() {
         this.onItemClickCallback = onItemClickCallback
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvItemName: TextView = view.findViewById(R.id.tv_item_name)
-        val ivItemPhoto: ImageView = view.findViewById(R.id.iv_item_photo)
+    inner class ViewHolder(binding: StoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        val tvItemName: TextView = binding.tvItemName
+        val ivItemPhoto: ImageView = binding.ivItemPhoto
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.story_item, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = StoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val story = stories[position]

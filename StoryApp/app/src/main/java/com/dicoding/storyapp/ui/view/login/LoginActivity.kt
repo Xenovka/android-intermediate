@@ -6,10 +6,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -57,24 +56,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupValidateInput() {
-        binding.edLoginEmail.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                setButtonEnabled()
-            }
-
-            override fun afterTextChanged(s: Editable) {}
+        binding.edLoginEmail.addTextChangedListener(onTextChanged = { _, _, _, _ ->
+            setButtonEnabled()
         })
 
-        binding.edLoginPassword.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                setButtonEnabled()
-            }
-
-            override fun afterTextChanged(s: Editable) {}
+        binding.edLoginPassword.addTextChangedListener(onTextChanged = { _, _, _, _ ->
+            setButtonEnabled()
         })
     }
 

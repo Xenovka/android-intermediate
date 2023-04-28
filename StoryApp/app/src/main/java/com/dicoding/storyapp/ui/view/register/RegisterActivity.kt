@@ -134,11 +134,5 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun showLoading(state: Boolean) {
-        if(state) {
-            binding.progressRegister.visibility = View.VISIBLE
-        } else {
-            binding.progressRegister.visibility = View.GONE
-        }
-    }
+    private fun showLoading(state: Boolean) { binding.progressRegister.visibility = if (state) View.VISIBLE else View.GONE }
 }

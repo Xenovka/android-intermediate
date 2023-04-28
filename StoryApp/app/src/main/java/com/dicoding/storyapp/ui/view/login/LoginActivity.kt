@@ -138,11 +138,5 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun showLoading(state: Boolean) {
-        if(state) {
-            binding.progressLogin.visibility = View.VISIBLE
-        } else {
-            binding.progressLogin.visibility = View.GONE
-        }
-    }
+    private fun showLoading(state: Boolean) { binding.progressLogin.visibility = if (state) View.VISIBLE else View.GONE }
 }

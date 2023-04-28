@@ -119,11 +119,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showLoading(state: Boolean) {
-        if(state) {
-            binding.progressStory.visibility = View.VISIBLE
-        } else {
-            binding.progressStory.visibility = View.GONE
-        }
-    }
+    private fun showLoading(state: Boolean) { binding.progressStory.visibility = if (state) View.VISIBLE else View.GONE }
 }

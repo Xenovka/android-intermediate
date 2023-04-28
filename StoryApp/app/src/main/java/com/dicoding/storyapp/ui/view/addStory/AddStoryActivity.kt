@@ -127,13 +127,7 @@ class AddStoryActivity : AppCompatActivity() {
         }
     }
 
-    private fun showLoading(state: Boolean) {
-        if(state) {
-            binding.progressUpload.visibility = View.VISIBLE
-        } else {
-            binding.progressUpload.visibility = View.GONE
-        }
-    }
+    private fun showLoading(state: Boolean) { binding.progressUpload.visibility = if (state) View.VISIBLE else View.GONE }
 
     private fun switchActivity() {
         startActivity(Intent(this@AddStoryActivity, MainActivity::class.java))

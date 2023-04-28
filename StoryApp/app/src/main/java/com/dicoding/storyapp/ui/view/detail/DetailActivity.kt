@@ -68,11 +68,5 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun showLoading(state: Boolean) {
-        if(state) {
-            binding.progressDetailStory.visibility = View.VISIBLE
-        } else {
-            binding.progressDetailStory.visibility = View.GONE
-        }
-    }
+    private fun showLoading(state: Boolean) { binding.progressDetailStory.visibility = if (state) View.VISIBLE else View.GONE }
 }

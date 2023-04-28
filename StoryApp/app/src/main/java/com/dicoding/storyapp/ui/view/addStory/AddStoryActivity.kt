@@ -37,12 +37,6 @@ class AddStoryActivity : AppCompatActivity() {
     private var getFile: File? = null
     private var token: String? = null
 
-    companion object {
-        const val CAMERA_X_RESULT = 200
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val REQUEST_CODE_PERMISSIONS = 10
-    }
-
     private val launcherCamera = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -157,5 +151,11 @@ class AddStoryActivity : AppCompatActivity() {
         intent.type = "image/*"
         val chooser = Intent.createChooser(intent, getString(R.string.choose_image))
         launcherIntentGallery.launch(chooser)
+    }
+
+    companion object {
+        const val CAMERA_X_RESULT = 200
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private const val REQUEST_CODE_PERMISSIONS = 10
     }
 }

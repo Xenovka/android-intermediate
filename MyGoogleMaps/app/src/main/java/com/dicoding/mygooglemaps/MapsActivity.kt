@@ -1,15 +1,19 @@
 package com.dicoding.mygooglemaps
 
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 
@@ -61,6 +65,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // val sydney = LatLng(-34.0, 151.0)
         // mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        getMyLocation()
 
         val dicodingSpace = LatLng(-6.8957643, 107.6338462)
         mMap.addMarker(
@@ -119,6 +125,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             else -> {
                 super.onOptionsItemSelected(item)
             }
+        }
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                getMyLocation()
+            }
+        }
+    private fun getMyLocation() {
+        if (ContextCompat.checkSelfPermission(
+                this.applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            mMap.isMyLocationEnabled = true
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
 

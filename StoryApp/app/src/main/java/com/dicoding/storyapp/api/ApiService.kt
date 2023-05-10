@@ -45,6 +45,13 @@ interface ApiService {
         @Header("Authorization") token: String?
     ): Call<StoryResponse>
 
+    @GET("v1/stories")
+    fun getStories(
+        @Header("Authorization") token: String?,
+        @Path("page") page: Int,
+        @Path("size") size: Int
+    ): List<StoryItem>
+
     @GET("v1/stories/{id}")
     fun getStoryDetail(
         @Path("id") id: String?,

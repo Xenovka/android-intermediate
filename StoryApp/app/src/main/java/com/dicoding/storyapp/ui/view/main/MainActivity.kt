@@ -85,12 +85,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.getAllStories().observe(this) {
-            if(it != null) {
-                storyListAdapter.setStories(it)
-                showLoading(false)
-            }
-        }
+//        viewModel.getAllStories().observe(this) {
+//            if(it != null) {
+//                storyListAdapter.setStories(it)
+//                showLoading(false)
+//            }
+//        }
     }
 
     private fun setupRecyclerView() {
@@ -100,6 +100,10 @@ class MainActivity : AppCompatActivity() {
             rvStory.layoutManager = LinearLayoutManager(this@MainActivity)
             rvStory.setHasFixedSize(true)
             rvStory.adapter = storyListAdapter
+        }
+
+        viewModel.story.observe(this) {
+            storyListAdapter.submitData(lifecycle, it)
         }
 
         storyListAdapter.setOnItemClickCallback(object: StoryListAdapter.OnItemClickCallback {

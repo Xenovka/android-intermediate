@@ -1,7 +1,9 @@
 package com.dicoding.storyapp.ui.view
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.dicoding.storyapp.di.Injection
 import com.dicoding.storyapp.model.UserPreference
 import com.dicoding.storyapp.ui.view.addStory.AddStoryViewModel
 import com.dicoding.storyapp.ui.view.detail.DetailViewModel
@@ -14,7 +16,7 @@ class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.New
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel(pref) as T
+                MainViewModel(pref, Injection.provideRepository()) as T
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(pref) as T

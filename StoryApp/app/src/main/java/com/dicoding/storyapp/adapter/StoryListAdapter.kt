@@ -4,26 +4,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.storyapp.api.StoryItem
 import com.dicoding.storyapp.databinding.StoryItemBinding
 
-class StoryListAdapter : RecyclerView.Adapter<StoryListAdapter.ViewHolder>() {
+class StoryListAdapter :
+    PagingDataAdapter<StoryItem, StoryListAdapter.ViewHolder>(DIFF_CALLBACK) {
     interface OnItemClickCallback {
         fun onItemClicked(data: StoryItem)
     }
 
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private val stories = ArrayList<StoryItem>()
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
-    }
-
-    inner class ViewHolder(binding: StoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val tvItemName: TextView = binding.tvItemName
-        val ivItemPhoto: ImageView = binding.ivItemPhoto
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,25 +29,33 @@ class StoryListAdapter : RecyclerView.Adapter<StoryListAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val story = stories[position]
-
-        holder.apply {
-            Glide.with(itemView)
-                .load(story.photoUrl)
-                .centerCrop()
-                .into(ivItemPhoto)
-
-            tvItemName.text = story.name
-
-            itemView.setOnClickListener { onItemClickCallback.onItemClicked(stories[adapterPosition]) }
+        val data = getItem(position)
+        if(data != null) {
+            holder.bind(data)
+            holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(data) }
         }
     }
 
-    override fun getItemCount(): Int = stories.size
+    class ViewHolder(private val binding: StoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(data: StoryItem) {
+            Glide.with(itemView)
+                .load(data.photoUrl)
+                .centerCrop()
+                .into(binding.ivItemPhoto)
 
-    fun setStories(list: ArrayList<StoryItem>) {
-        stories.clear()
-        stories.addAll(list)
-        notifyDataSetChanged()
+            binding.tvItemName.text = data.name
+        }
+    }
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryItem>() {
+            override fun areItemsTheSame(oldItem: StoryItem, newItem: StoryItem): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: StoryItem, newItem: StoryItem): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
     }
 }

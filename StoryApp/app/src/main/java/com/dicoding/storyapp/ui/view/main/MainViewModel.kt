@@ -6,9 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.dicoding.storyapp.api.ApiConfig
 import com.dicoding.storyapp.api.StoryItem
 import com.dicoding.storyapp.api.StoryResponse
+import com.dicoding.storyapp.data.StoryRepository
 import com.dicoding.storyapp.model.UserModel
 import com.dicoding.storyapp.model.UserPreference
 import kotlinx.coroutines.launch
@@ -16,8 +19,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel(private val pref: UserPreference) : ViewModel() {
+class MainViewModel(private val pref: UserPreference, private val storyRepository: StoryRepository) : ViewModel() {
     val stories = MutableLiveData<ArrayList<StoryItem>>()
+    val story: LiveData<PagingData<StoryItem>> = storyRepository.getStories().cachedIn(viewModelScope)
 
     fun getUser(): LiveData<UserModel> {
         return pref.getUser().asLiveData()

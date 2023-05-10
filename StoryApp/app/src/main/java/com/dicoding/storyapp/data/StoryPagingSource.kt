@@ -33,7 +33,7 @@ class StoryPagingSource(private val apiService: ApiService): PagingSource<Int, S
                 properties.load(inputStream)
             }
             val defaultApiKey = properties.getProperty("API_KEY")
-            val responseData = apiService.getStories("Bearer ${defaultApiKey}", position, params.loadSize)
+            val responseData = apiService.getStories("Bearer $defaultApiKey", position, params.loadSize)
             LoadResult.Page(
                 data = responseData,
                 prevKey = if(position == INITIAL_PAGE_INDEX) null else position - 1,

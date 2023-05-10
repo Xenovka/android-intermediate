@@ -48,8 +48,8 @@ interface ApiService {
     @GET("v1/stories")
     fun getStories(
         @Header("Authorization") token: String?,
-        @Path("page") page: Int,
-        @Path("size") size: Int
+        @Path("page") page: Int = 1,
+        @Path("size") size: Int = 10
     ): List<StoryItem>
 
     @GET("v1/stories/{id}")

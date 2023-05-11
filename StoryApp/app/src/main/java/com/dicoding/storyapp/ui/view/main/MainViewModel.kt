@@ -21,7 +21,7 @@ import retrofit2.Response
 
 class MainViewModel(private val pref: UserPreference, private val storyRepository: StoryRepository) : ViewModel() {
     val stories = MutableLiveData<ArrayList<StoryItem>>()
-    val story: LiveData<PagingData<StoryItem>> = storyRepository.getStories().cachedIn(viewModelScope)
+    fun story(token: String): LiveData<PagingData<StoryItem>> = storyRepository.getStories(token).cachedIn(viewModelScope)
 
     fun getUser(): LiveData<UserModel> {
         return pref.getUser().asLiveData()

@@ -9,13 +9,13 @@ import com.dicoding.storyapp.api.ApiService
 import com.dicoding.storyapp.api.StoryItem
 
 class StoryRepository(private val apiService: ApiService) {
-    fun getStories(): LiveData<PagingData<StoryItem>> {
+    fun getStories(token: String): LiveData<PagingData<StoryItem>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10
             ),
             pagingSourceFactory = {
-                StoryPagingSource(apiService)
+                StoryPagingSource(apiService, token)
             }
         ).liveData
     }

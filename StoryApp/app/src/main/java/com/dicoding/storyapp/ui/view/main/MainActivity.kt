@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         showLoading(true)
 
         setupViewModel()
-        setupRecyclerView()
 
         playAnimation()
     }
@@ -81,19 +80,8 @@ class MainActivity : AppCompatActivity() {
                 finish()
             } else {
                 token = user.token
-                viewModel.setAllStories(token)
+                setupRecyclerView()
             }
-        }
-
-//        viewModel.getAllStories().observe(this) {
-//            if(it != null) {
-//                storyListAdapter.setStories(it)
-//                showLoading(false)
-//            }
-//        }
-
-        viewModel.story.observe(this) {
-            storyListAdapter.submitData(lifecycle, it)
         }
     }
 
@@ -102,9 +90,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
             rvStory.layoutManager = LinearLayoutManager(this@MainActivity)
-            rvStory.setHasFixedSize(true)
             rvStory.adapter = storyListAdapter
         }
+
+        viewModel.story(token.toString()).observe(this) {
+            storyListAdapter.submitData(lifecycle, it)
+        }
+        showLoading(false)
 
         storyListAdapter.setOnItemClickCallback(object: StoryListAdapter.OnItemClickCallback {
             override fun onItemClicked(data: StoryItem) {

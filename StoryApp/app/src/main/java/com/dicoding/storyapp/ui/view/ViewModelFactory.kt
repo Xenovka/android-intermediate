@@ -9,6 +9,7 @@ import com.dicoding.storyapp.ui.view.addStory.AddStoryViewModel
 import com.dicoding.storyapp.ui.view.detail.DetailViewModel
 import com.dicoding.storyapp.ui.view.login.LoginViewModel
 import com.dicoding.storyapp.ui.view.main.MainViewModel
+import com.dicoding.storyapp.ui.view.maps.MapsViewModel
 import com.dicoding.storyapp.ui.view.register.RegisterViewModel
 
 class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
@@ -29,6 +30,9 @@ class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.New
             }
             modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
                 AddStoryViewModel(pref) as T
+            }
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(pref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

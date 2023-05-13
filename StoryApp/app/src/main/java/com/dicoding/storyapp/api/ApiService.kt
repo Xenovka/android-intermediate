@@ -11,11 +11,14 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
+
+private const val token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLUFmMDNiWkloMi1sbW4ycW8iLCJpYXQiOjE2ODIxNzA5NTV9.0aMjCtcw6B7sNppymxhtxUE84YPuVQT3WPUohgd5ZTI"
 
 interface ApiService {
     @FormUrlEncoded
@@ -41,10 +44,10 @@ interface ApiService {
         @Header("Authorization") token: String?
     ): Call<StoryUploadResponse>
 
-    @GET("v1/stories")
-    fun getAllStories(
-        @Header("Authorization") token: String?
-    ): Call<StoryResponse>
+//    @GET("v1/stories")
+//    fun getAllStories(
+//        @Header("Authorization") token: String?
+//    ): Call<StoryResponse>
 
     @GET("v1/stories")
     suspend fun getStories(
@@ -52,6 +55,10 @@ interface ApiService {
         @Query("page") page: Int = 1,
         @Query("size") size: Int = 10
     ): StoryResponse
+
+    @GET("v1/stories?location=1&size=99999")
+    @Headers("Authorization: Bearer $token")
+    fun getStoryWithLocation(): Call<StoryResponse>
 
     @GET("v1/stories/{id}")
     fun getStoryDetail(

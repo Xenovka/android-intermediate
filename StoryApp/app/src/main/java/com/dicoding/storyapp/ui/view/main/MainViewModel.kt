@@ -20,7 +20,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel(private val pref: UserPreference, private val storyRepository: StoryRepository) : ViewModel() {
-    val stories = MutableLiveData<ArrayList<StoryItem>>()
+//    val stories = MutableLiveData<ArrayList<StoryItem>>()
     fun story(token: String): LiveData<PagingData<StoryItem>> = storyRepository.getStories(token).cachedIn(viewModelScope)
 
     fun getUser(): LiveData<UserModel> {
@@ -33,26 +33,26 @@ class MainViewModel(private val pref: UserPreference, private val storyRepositor
         }
     }
 
-    fun setAllStories(token: String?) {
-        ApiConfig.getApiService()
-            .getAllStories("Bearer $token")
-            .enqueue(object: Callback<StoryResponse> {
-                override fun onResponse(
-                    call: Call<StoryResponse>,
-                    response: Response<StoryResponse>
-                ) {
-                    if(response.isSuccessful) {
-                        stories.postValue(response.body()?.listStory)
-                    }
-                }
-
-                override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
-                    Log.e("ErrorFetchStories", "onFailure: ${t.message}")
-                }
-            })
-    }
-
-    fun getAllStories(): LiveData<ArrayList<StoryItem>> {
-        return stories
-    }
+//    fun setAllStories(token: String?) {
+//        ApiConfig.getApiService()
+//            .getAllStories("Bearer $token")
+//            .enqueue(object: Callback<StoryResponse> {
+//                override fun onResponse(
+//                    call: Call<StoryResponse>,
+//                    response: Response<StoryResponse>
+//                ) {
+//                    if(response.isSuccessful) {
+//                        stories.postValue(response.body()?.listStory)
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
+//                    Log.e("ErrorFetchStories", "onFailure: ${t.message}")
+//                }
+//            })
+//    }
+//
+//    fun getAllStories(): LiveData<ArrayList<StoryItem>> {
+//        return stories
+//    }
 }

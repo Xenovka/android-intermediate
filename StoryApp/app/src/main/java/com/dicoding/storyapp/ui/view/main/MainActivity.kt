@@ -24,6 +24,7 @@ import com.dicoding.storyapp.ui.view.ViewModelFactory
 import com.dicoding.storyapp.ui.view.addStory.AddStoryActivity
 import com.dicoding.storyapp.ui.view.detail.DetailActivity
 import com.dicoding.storyapp.ui.view.login.LoginActivity
+import com.dicoding.storyapp.ui.view.maps.MapsActivity
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "data")
 
@@ -62,6 +63,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.menu_add_story -> {
                 startActivity(Intent(this@MainActivity, AddStoryActivity::class.java))
+                true
+            }
+            R.id.menu_maps -> {
+                startActivity(Intent(this@MainActivity, MapsActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

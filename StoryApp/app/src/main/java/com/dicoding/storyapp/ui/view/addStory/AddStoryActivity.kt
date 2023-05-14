@@ -6,9 +6,11 @@ import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.location.Location
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -27,6 +29,8 @@ import com.dicoding.storyapp.ui.view.ViewModelFactory
 import com.dicoding.storyapp.ui.view.camera.CameraActivity
 import com.dicoding.storyapp.ui.view.main.MainActivity
 import com.dicoding.storyapp.uriToFile
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import java.io.File
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "data")
@@ -34,8 +38,11 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class AddStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddStoryBinding
     private lateinit var viewModel: AddStoryViewModel
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var getFile: File? = null
     private var token: String? = null
+    private var lat: Float? = null
+    private var lon: Float? = null
 
     private val launcherCamera = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -81,6 +88,8 @@ class AddStoryActivity : AppCompatActivity() {
             )
         }
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         supportActionBar?.title = "New Story"
 
         setupViewModel()
@@ -88,14 +97,26 @@ class AddStoryActivity : AppCompatActivity() {
         binding.apply {
             btnCamera.setOnClickListener { startCamera() }
             btnGallery.setOnClickListener { startGallery() }
+
+            cbLocation.setOnCheckedChangeListener { _, isChecked ->
+                if(isChecked) {
+                    getMyLocation()
+                } else {
+                    lat = null
+                    lon = null
+                }
+            }
+
             btnAdd.setOnClickListener {
                 val description = edAddDescription.text.toString()
+
                 if(getFile != null) {
                     val file = reduceFileImage(getFile as File)
                     Toast.makeText(this@AddStoryActivity, "Upload Successful", Toast.LENGTH_SHORT).show()
                     if(description.isNotEmpty()) {
                         showLoading(true)
-                        viewModel.uploadStory(file, description, token)
+                        Log.d("LOCATION", lon.toString())
+                        viewModel.uploadStory(file, description, token, lat, lon)
                     } else {
                         edAddDescription.error = "Description can not be empty!"
                         showLoading(false)
@@ -104,6 +125,41 @@ class AddStoryActivity : AppCompatActivity() {
                     Toast.makeText(this@AddStoryActivity, "Please take a picture or choose from gallery!", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
+                    getMyLocation()
+                }
+                else -> {
+                    // No location access granted.
+                }
+            }
+        }
+
+    private fun getMyLocation() {
+        if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+           fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+               if(location != null) {
+                   lat = location.latitude.toFloat()
+                   lon = location.longitude.toFloat()
+               } else {
+                   Toast.makeText(
+                       this,
+                       "Location is not found. Try again!",
+                       Toast.LENGTH_SHORT
+                   ).show()
+               }
+           }
+        } else {
+            requestPermissionLauncher.launch(
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+            )
         }
     }
 

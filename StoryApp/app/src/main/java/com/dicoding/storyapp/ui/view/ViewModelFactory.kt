@@ -1,6 +1,5 @@
 package com.dicoding.storyapp.ui.view
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.storyapp.di.Injection

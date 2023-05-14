@@ -33,4 +33,5 @@
     <string name="change_language">Change Language</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="maps">Maps</string>
+    <string name="include_location">Include Location</string>
 </resources>

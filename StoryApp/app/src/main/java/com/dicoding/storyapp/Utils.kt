@@ -10,7 +10,6 @@ import android.net.Uri
 import android.os.Environment
 import android.util.Patterns
 import java.io.*
-import java.util.Properties
 import java.text.SimpleDateFormat
 import java.util.*
 

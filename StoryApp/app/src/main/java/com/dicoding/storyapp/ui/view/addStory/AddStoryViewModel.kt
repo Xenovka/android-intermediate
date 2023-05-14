@@ -23,7 +23,7 @@ class AddStoryViewModel(private val pref: UserPreference): ViewModel() {
         return pref.getUser().asLiveData()
     }
 
-    fun uploadStory(file: File?, description: String, token: String?) {
+    fun uploadStory(file: File?, description: String, token: String?, lat: Float?, lon: Float?) {
         if(file != null && token != null) {
             val imageDescription = description.toRequestBody("text/plain".toMediaType())
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
@@ -34,7 +34,7 @@ class AddStoryViewModel(private val pref: UserPreference): ViewModel() {
             )
 
             ApiConfig.getApiService()
-                .uploadStory(imageMultiPart, imageDescription, "Bearer $token")
+                .uploadStory("Bearer $token", imageMultiPart, imageDescription, lat, lon)
                 .enqueue(object: Callback<StoryUploadResponse> {
                     override fun onResponse(
                         call: Call<StoryUploadResponse>,

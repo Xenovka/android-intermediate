@@ -58,6 +58,17 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <CheckBox
+        android:id="@+id/cb_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="@string/include_location"
+        app:layout_constraintTop_toBottomOf="@id/layout_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_add"/>
+
     <Button
         android:id="@+id/btn_add"
         android:layout_width="0dp"
@@ -65,7 +76,7 @@
         android:text="@string/upload_story"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_description"/>
+        app:layout_constraintTop_toBottomOf="@id/cb_location"/>
 
     <ProgressBar
         android:id="@+id/progress_upload"

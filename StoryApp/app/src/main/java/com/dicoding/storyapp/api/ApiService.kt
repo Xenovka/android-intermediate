@@ -39,15 +39,12 @@ interface ApiService {
     @Multipart
     @POST("v1/stories")
     fun uploadStory(
+        @Header("Authorization") token: String?,
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
-        @Header("Authorization") token: String?
+        @Part("lat") lat: Float?,
+        @Part("lon") lon: Float?
     ): Call<StoryUploadResponse>
-
-//    @GET("v1/stories")
-//    fun getAllStories(
-//        @Header("Authorization") token: String?
-//    ): Call<StoryResponse>
 
     @GET("v1/stories")
     suspend fun getStories(

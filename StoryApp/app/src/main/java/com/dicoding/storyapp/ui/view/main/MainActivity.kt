@@ -16,6 +16,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.storyapp.R
+import com.dicoding.storyapp.adapter.LoadingStateAdapter
 import com.dicoding.storyapp.adapter.StoryListAdapter
 import com.dicoding.storyapp.api.StoryItem
 import com.dicoding.storyapp.databinding.ActivityMainBinding
@@ -95,7 +96,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
             rvStory.layoutManager = LinearLayoutManager(this@MainActivity)
-            rvStory.adapter = storyListAdapter
+            rvStory.adapter = storyListAdapter.withLoadStateFooter(
+                footer = LoadingStateAdapter {
+                    storyListAdapter.retry()
+                }
+            )
         }
 
         viewModel.story(token.toString()).observe(this) {

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.dicoding.storyapp.api.ApiConfig
 import com.dicoding.storyapp.api.StoryItem
 import com.dicoding.storyapp.api.StoryResponse
-import com.dicoding.storyapp.model.UserPreference
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

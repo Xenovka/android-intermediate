@@ -1,10 +1,7 @@
 package com.dicoding.storyapp.data
 
 import androidx.lifecycle.LiveData
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.liveData
+import androidx.paging.*
 import com.dicoding.storyapp.api.ApiService
 import com.dicoding.storyapp.api.StoryItem
 

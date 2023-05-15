@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MapsViewModel(private val pref: UserPreference): ViewModel() {
+class MapsViewModel(): ViewModel() {
     val stories = MutableLiveData<ArrayList<StoryItem>>()
 
     fun setStories() {

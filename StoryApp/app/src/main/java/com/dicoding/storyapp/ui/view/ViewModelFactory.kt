@@ -31,7 +31,7 @@ class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.New
                 AddStoryViewModel(pref) as T
             }
             modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
-                MapsViewModel(pref) as T
+                MapsViewModel() as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

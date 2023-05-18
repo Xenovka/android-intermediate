@@ -35,4 +35,6 @@
     <string name="maps">Maps</string>
     <string name="include_location">Include Location</string>
     <string name="retry">Retry</string>
+    <string name="capture_image">Capture Image</string>
+    <string name="switch_camera">Switch Camera</string>
 </resources>

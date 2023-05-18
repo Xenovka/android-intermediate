@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MapsViewModel(): ViewModel() {
+class MapsViewModel: ViewModel() {
     val stories = MutableLiveData<ArrayList<StoryItem>>()
 
     fun setStories() {
